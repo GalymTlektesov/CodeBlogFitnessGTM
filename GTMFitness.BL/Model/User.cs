@@ -5,7 +5,8 @@ namespace GTMFitness.BL.Model
     /// <summary>
     /// Пользователь.
     /// </summary>
-    class User
+    [Serializable]
+    public class User
     {
         #region Свойства
         /// <summary>
@@ -43,10 +44,10 @@ namespace GTMFitness.BL.Model
         /// <param name="weight"> Вес. </param>
         /// <param name="height"> Рост. </param>
         public User(string name,
-            Gender gender,
-            DateTime birthDate,
-            double weight,
-            double height)
+                    Gender gender,
+                    DateTime birthDate,
+                    double weight,
+                    double height)
         {
             #region Проверка условий
             if(string.IsNullOrWhiteSpace(name))
@@ -54,7 +55,7 @@ namespace GTMFitness.BL.Model
                 throw new ArgumentNullException("Имя имя пользователя не может быть пустым или Null.", nameof(name));
             }
 
-            if(Gender == null)
+            if(gender == null)
             {
                 throw new ArgumentNullException("Пол не может быть null.", nameof(gender)); 
             }

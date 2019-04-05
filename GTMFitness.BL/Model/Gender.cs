@@ -5,6 +5,7 @@ namespace GTMFitness.BL.Model
     /// <summary>
     /// Пол
     /// </summary>
+    [Serializable]
     public class Gender
     {
         /// <summary>
@@ -15,7 +16,7 @@ namespace GTMFitness.BL.Model
         /// <summary>
         /// Создать новый пол
         /// </summary>
-        /// <param name="name"> Имя пола</param>
+        /// <param name="name"> Имя пола. </param>
         public Gender(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
