@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTMFitness.BL", "GTMFitness
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CB_GTMFitness.CMD", "CB_GTMFitness.CMD\CB_GTMFitness.CMD.csproj", "{56EBE823-DBFE-4101-93F7-FD3251F71B7B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTMFitness.BLTests", "GTMFitness.BLTests\GTMFitness.BLTests.csproj", "{5B4D62FE-C5CA-42FA-A5BC-2C99CAF50FE9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{56EBE823-DBFE-4101-93F7-FD3251F71B7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56EBE823-DBFE-4101-93F7-FD3251F71B7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56EBE823-DBFE-4101-93F7-FD3251F71B7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B4D62FE-C5CA-42FA-A5BC-2C99CAF50FE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B4D62FE-C5CA-42FA-A5BC-2C99CAF50FE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B4D62FE-C5CA-42FA-A5BC-2C99CAF50FE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B4D62FE-C5CA-42FA-A5BC-2C99CAF50FE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

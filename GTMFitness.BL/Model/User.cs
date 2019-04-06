@@ -57,7 +57,7 @@ namespace GTMFitness.BL.Model
             #region Проверка условий
             if(string.IsNullOrWhiteSpace(name))
             {
-                throw new ArgumentNullException("Имя имя пользователя не может быть пустым или Null.", nameof(name));
+                throw new ArgumentNullException("Имя пользователя не может быть пустым или Null.", nameof(name));
             }
 
             if(gender == null)
