@@ -10,7 +10,7 @@ namespace GTMFitness.BL.Controller
     /// <summary>
     /// Контроллер пользоваетеля.
     /// </summary>
-    public class UserController
+    public class UserController : ControllerBase
     {
         /// <summary>
         /// Рользователь приложения.
@@ -20,6 +20,8 @@ namespace GTMFitness.BL.Controller
         public User Currentuser { get; }
 
         public bool IsNewUser { get; } = false;
+
+        private const string USERS_FILE_NAME = "users.dat";
 
         /// <summary>
         /// Создание нового контроллера пользователя.
@@ -51,19 +53,7 @@ namespace GTMFitness.BL.Controller
         /// <returns></returns>
         private List<User> GetUsersData()
         {
-            var formatter = new BinaryFormatter();
-
-            using (var fs = new FileStream("users.dat", FileMode.OpenOrCreate))
-            {
-                if (fs.Length > 0 && formatter.Deserialize(fs) is List<User> users)
-                {
-                    return users;
-                }
-                else
-                {
-                    return new List<User>();
-                }
-            }
+            return Load<List<User>>(USERS_FILE_NAME) ?? new List<User>();
         }
 
 
@@ -82,17 +72,7 @@ namespace GTMFitness.BL.Controller
         /// </summary>
         public void Save()
         {
-            var formatter = new BinaryFormatter();
-
-            using (var fs = new FileStream("users.dat", FileMode.OpenOrCreate))
-            {
-                formatter.Serialize(fs, Users);
-            }
+            Save(USERS_FILE_NAME, Users);
         }
-
-        /// <summary>
-        /// Получить данные пользователя.
-        /// </summary>
-        /// <returns>Пользоветель приложения.</returns>
     }
 }

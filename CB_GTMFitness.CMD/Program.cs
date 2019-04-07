@@ -1,4 +1,5 @@
 ﻿using GTMFitness.BL.Controller;
+using GTMFitness.BL.Model;
 using System;
 
 namespace CB_GTMFitness.CMD
@@ -12,6 +13,7 @@ namespace CB_GTMFitness.CMD
             var name = Console.ReadLine();
 
             var userController = new UserController(name);
+            var eatingController = new EatingController(userController.Currentuser);
             if (userController.IsNewUser)
             {
                 Console.Write("Введите пол: ");
@@ -25,7 +27,40 @@ namespace CB_GTMFitness.CMD
 
 
             Console.WriteLine(userController.Currentuser);
+
+            Console.WriteLine("Что вы ещё хотите сделать?");
+            Console.WriteLine("E-ввести приём пищи");
+            var key = Console.ReadKey();
+            Console.WriteLine();
+
+            if(key.Key == ConsoleKey.E)
+            {
+                var foods = EnterEating();
+                eatingController.Add(foods.Food, foods.Weight);
+
+                foreach(var item in eatingController.Eating.Foods)
+                {
+                    Console.WriteLine($"\t{item.Key} - {item.Value}");
+                }
+            }
+
             Console.ReadLine();
+        }
+
+        private static (Food Food, double Weight) EnterEating()
+        {
+            Console.Write("введите имя продукта: ");
+            var food = Console.ReadLine();
+
+            var calories = ParseDouble("калорийность");
+            var proteins = ParseDouble("белки");
+            var fats = ParseDouble("жиры");
+            var carbohydates = ParseDouble("углеводы");
+
+            var weight = ParseDouble("вес порции");
+            var product = new Food(food, calories, proteins, fats, carbohydates);
+
+            return (Food: product, Weight: weight);
         }
 
         private static DateTime ParseDateTime()
@@ -58,7 +93,7 @@ namespace CB_GTMFitness.CMD
                 }
                 else
                 {
-                    Console.WriteLine($"Не верный формат {name}а");
+                    Console.WriteLine($"Не верный формат поля {name}");
                 }
             }
         }
