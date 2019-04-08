@@ -27,11 +27,11 @@ namespace GTMFitness.BL.Controller.Tests
             var controller2 = new UserController(userName);
 
             //Assert
-            Assert.AreEqual(userName, controller2.Currentuser.Name);
-            Assert.AreEqual(birthdate, controller2.Currentuser.BirthDate);
-            Assert.AreEqual(weight, controller2.Currentuser.Weight);
-            Assert.AreEqual(height, controller2.Currentuser.Height);
-            Assert.AreEqual(gender, controller2.Currentuser.Gender.Name);
+            Assert.AreEqual(userName, controller2.CurrentUser.Name);
+            Assert.AreEqual(birthdate, controller2.CurrentUser.BirthDate);
+            Assert.AreEqual(weight, controller2.CurrentUser.Weight);
+            Assert.AreEqual(height, controller2.CurrentUser.Height);
+            Assert.AreEqual(gender, controller2.CurrentUser.Gender.Name);
         }
 
         [TestMethod()]
@@ -44,7 +44,7 @@ namespace GTMFitness.BL.Controller.Tests
             var controller = new UserController(userName);
 
             // Assert
-            Assert.AreEqual(userName, controller.Currentuser.Name);
+            Assert.AreEqual(userName, controller.CurrentUser.Name);
         }
     }
 }

@@ -18,12 +18,13 @@ namespace CB_GTMFitness.CMD
             var name = Console.ReadLine();
 
             var userController = new UserController(name);
-            var eatingController = new EatingController(userController.Currentuser);
+            var eatingController = new EatingController(userController.CurrentUser);
+            var exerciseController = new ExerciseController(userController.CurrentUser);
             if (userController.IsNewUser)
             {
                 Console.Write("Введите пол: ");
                 var gender = Console.ReadLine();
-                var birthdate = ParseDateTime();
+                var birthdate = ParseDateTime("дата рождения");
                 var weight = ParseDouble("Вес");
                 var height = ParseDouble("Рост");
 
@@ -31,25 +32,60 @@ namespace CB_GTMFitness.CMD
             }
 
 
-            Console.WriteLine(userController.Currentuser);
+            Console.WriteLine(userController.CurrentUser);
 
-            Console.WriteLine("Что вы ещё хотите сделать?");
-            Console.WriteLine("E-ввести приём пищи");
-            var key = Console.ReadKey();
-            Console.WriteLine();
-
-            if(key.Key == ConsoleKey.E)
+            while (true)
             {
-                var foods = EnterEating();
-                eatingController.Add(foods.Food, foods.Weight);
+                Console.WriteLine("Что вы ещё хотите сделать?");
+                Console.WriteLine("E-ввести приём пищи");
+                Console.WriteLine("A-ввести упражнение");
+                Console.WriteLine("Q-выход");
+                var key = Console.ReadKey();
+                Console.WriteLine();
 
-                foreach(var item in eatingController.Eating.Foods)
+                switch (key.Key)
                 {
-                    Console.WriteLine($"\t{item.Key} - {item.Value}");
-                }
-            }
+                    case ConsoleKey.E:
+                        var foods = EnterEating();
+                        eatingController.Add(foods.Food, foods.Weight);
 
-            Console.ReadLine();
+                        foreach (var item in eatingController.Eating.Foods)
+                        {
+                            Console.WriteLine($"\t{item.Key} - {item.Value}");
+                        }
+                        break;
+
+                    case ConsoleKey.A:
+                        var exe = EnterExercise();
+                        exerciseController.Add(exe.Activity, exe.Begin, exe.End);
+                        foreach(var item in exerciseController.Exercises)
+                        {
+                            Console.WriteLine($"{item.Activity} с {item.Start.ToShortTimeString()} до {item.Finish.ToShortTimeString()}");
+                        }
+                        break;
+
+                    case ConsoleKey.Q:
+                        Environment.Exit(0);
+                        break;
+
+                }
+
+                Console.ReadLine();
+            }
+        }
+
+        private static (DateTime Begin, DateTime End, Activity Activity) EnterExercise()
+        {
+            Console.Write("введите название упражнения: ");
+            var name = Console.ReadLine();
+
+            var energy = ParseDouble("расход энергии в минуту");
+
+            var begin = ParseDateTime("начало упражнения");
+            var end = ParseDateTime("окончание упражнения");
+
+            var activity = new Activity(name, energy);
+            return (begin, end, activity);
         }
 
         private static (Food Food, double Weight) EnterEating()
@@ -68,19 +104,19 @@ namespace CB_GTMFitness.CMD
             return (Food: product, Weight: weight);
         }
 
-        private static DateTime ParseDateTime()
+        private static DateTime ParseDateTime(string value)
         {
             DateTime birthdate;
             while (true)
             {
-                Console.Write("Введите дату рождения(DD.MM.YYYY): ");
+                Console.Write($"Введите {value}(DD.MM.YYYY): ");
                 if (DateTime.TryParse(Console.ReadLine(), out birthdate))
                 {
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("Не верный формат даты рождения");
+                    Console.WriteLine($"Неверный формат поля {value}");
                 }
             }
 

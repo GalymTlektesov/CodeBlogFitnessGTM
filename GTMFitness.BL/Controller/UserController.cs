@@ -17,7 +17,7 @@ namespace GTMFitness.BL.Controller
         /// </summary>
         public List<User> Users { get; }
 
-        public User Currentuser { get; }
+        public User CurrentUser { get; }
 
         public bool IsNewUser { get; } = false;
 
@@ -36,12 +36,12 @@ namespace GTMFitness.BL.Controller
 
             Users = GetUsersData();
 
-            Currentuser = Users.SingleOrDefault(u => u.Name == userName);
+            CurrentUser = Users.SingleOrDefault(u => u.Name == userName);
 
-            if(Currentuser == null)
+            if(CurrentUser == null)
             {
-                Currentuser = new User(userName);
-                Users.Add(Currentuser);
+                CurrentUser = new User(userName);
+                Users.Add(CurrentUser);
                 IsNewUser = true;
                 Save();
             }
@@ -61,10 +61,10 @@ namespace GTMFitness.BL.Controller
         {
             // Проверка
 
-            Currentuser.Gender = new Gender(genderName);
-            Currentuser.BirthDate = birthDate;
-            Currentuser.Weight = weight;
-            Currentuser.Height = height;
+            CurrentUser.Gender = new Gender(genderName);
+            CurrentUser.BirthDate = birthDate;
+            CurrentUser.Weight = weight;
+            CurrentUser.Height = height;
             Save();
         }
         /// <summary>
