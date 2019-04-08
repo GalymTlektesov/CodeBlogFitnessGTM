@@ -1,6 +1,8 @@
 ﻿using GTMFitness.BL.Controller;
 using GTMFitness.BL.Model;
 using System;
+using System.Globalization;
+using System.Resources;
 
 namespace CB_GTMFitness.CMD
 {
@@ -8,8 +10,11 @@ namespace CB_GTMFitness.CMD
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Вас приветствует приложение CodeBlogFitnessGTM");
-            Console.WriteLine("Введите имя пользоветеля");
+            var culture = CultureInfo.CreateSpecificCulture("en-us");
+            var resourceManager = new ResourceManager("CB_GTMFitness.CMD.Languages.Message", typeof(Program).Assembly);
+
+            Console.WriteLine(resourceManager.GetString("Hello", culture));
+            Console.WriteLine(resourceManager.GetString("EnterName", culture));
             var name = Console.ReadLine();
 
             var userController = new UserController(name);
