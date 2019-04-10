@@ -21,8 +21,6 @@ namespace GTMFitness.BL.Controller
 
         public bool IsNewUser { get; } = false;
 
-        private const string USERS_FILE_NAME = "users.dat";
-
         /// <summary>
         /// Создание нового контроллера пользователя.
         /// </summary>
@@ -43,7 +41,6 @@ namespace GTMFitness.BL.Controller
                 CurrentUser = new User(userName);
                 Users.Add(CurrentUser);
                 IsNewUser = true;
-                Save();
             }
         }
 
@@ -53,7 +50,7 @@ namespace GTMFitness.BL.Controller
         /// <returns></returns>
         private List<User> GetUsersData()
         {
-            return Load<List<User>>(USERS_FILE_NAME) ?? new List<User>();
+            return Load<User>() ?? new List<User>();
         }
 
 
@@ -67,12 +64,13 @@ namespace GTMFitness.BL.Controller
             CurrentUser.Height = height;
             Save();
         }
+
         /// <summary>
         /// Сохранить данные пользователя.
         /// </summary>
         public void Save()
         {
-            Save(USERS_FILE_NAME, Users);
+            Save(Users);
         }
     }
 }
